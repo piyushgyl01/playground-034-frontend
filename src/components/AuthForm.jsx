@@ -86,8 +86,8 @@ export default function AuthForm({ isLogin = true }) {
         return false;
       }
 
-      if (formData.password === formData.confirmPassword) {
-        setFormData("Passwords do not match");
+      if (formData.password !== formData.confirmPassword) {
+        setFormError("Passwords do not match");
         return false;
       }
 
@@ -251,7 +251,7 @@ export default function AuthForm({ isLogin = true }) {
             Password
           </label>
           <input
-            type="text"
+            type="password"
             name="password"
             id="password"
             className="form-control"
@@ -261,16 +261,25 @@ export default function AuthForm({ isLogin = true }) {
           />
         </div>
 
-        {!isLogin && <PasswordStrengthMeter />}
-
+        {!isLogin && (
+            <PasswordStrengthMeter 
+              password={formData.password} 
+              userInfo={{
+                username: formData.username,
+                email: formData.email,
+                name: formData.name
+              }}
+              onFeedback={handlePasswordFeedback}
+            />
+          )}
         <div className="mb-3">
-          <label htmlFor="conirmPassword" className="form-label">
+          <label htmlFor="confirmPassword" className="form-label">
             Confirm Password
           </label>
           <input
-            type="text"
-            name="conirmPassword"
-            id="conirmPassword"
+            type="password"
+            name="confirmPassword"
+            id="confirmPassword"
             className="form-control"
             value={formData.confirmPassword}
             onChange={handleChange}
