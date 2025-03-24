@@ -43,13 +43,13 @@ function App() {
         <Route path="/" element={<Posts />}></Route>
         <Route path="/:id" element={<PostDetail />}></Route>
 
-        {/* <Route element={<ProtectedRoute />}> */}
+        <Route element={<ProtectedRoute />}>
         <Route path="/dashboard" element={<Dashboard />}></Route>
         <Route path="/profile" element={<Profile />}></Route>
         <Route path="/create" element={<CreatePost />}></Route>
         <Route path="/edit/:id" element={<EditPost />}></Route>
         <Route path="/mfa/setup" element={<MfaSetup />}></Route>
-        {/* </Route> */}
+        </Route>
       </Routes>
     </Router>
   );

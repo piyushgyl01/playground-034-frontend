@@ -23,7 +23,7 @@ API.interceptors.response.use(
       try {
         await refreshToken();
         return API(originalRequest);
-      } catch (error) {
+      } catch (refreshError) {
         return Promise.reject(refreshError);
       }
     }
@@ -32,6 +32,7 @@ API.interceptors.response.use(
   }
 );
 
+// Authentication service functions
 export const registerUser = async (userData) => {
   const response = await API.post("/auth/register", userData);
   return response.data;
@@ -57,6 +58,7 @@ export const getCurrentUser = async () => {
   return response.data;
 };
 
+// OAuth helpers
 export const getGoogleAuthUrl = () => {
   return `${API.defaults.baseURL}/auth/google`;
 };
@@ -65,16 +67,18 @@ export const getGithubAuthUrl = () => {
   return `${API.defaults.baseURL}/auth/github`;
 };
 
-export const verifyMail = async (token) => {
+// Email verification functions
+export const verifyEmail = async (token) => {
   const response = await API.get(`/auth/verify-email?token=${token}`);
   return response.data;
 };
 
-export const resendVerification = async () => {
+export const resendVerificationEmail = async () => {
   const response = await API.post("/auth/resend-verification");
   return response.data;
 };
 
+// Password reset functions
 export const forgotPassword = async (email) => {
   const response = await API.post("/auth/forgot-password", { email });
   return response.data;
@@ -85,6 +89,7 @@ export const resetPassword = async ({ token, password }) => {
   return response.data;
 };
 
+// MFA functions
 export const setupMfa = async () => {
   const response = await API.post("/auth/mfa/setup");
   return response.data;
