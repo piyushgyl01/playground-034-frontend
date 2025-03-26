@@ -1,7 +1,9 @@
-import React from 'react'
+import PostList from "../features/post/PostList";
 
 export default function Posts() {
   return (
-    <div>Posts</div>
-  )
+    <div className="container py-5">
+      <PostList />
+    </div>
+  );
 }

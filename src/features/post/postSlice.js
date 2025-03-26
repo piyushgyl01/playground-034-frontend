@@ -57,16 +57,19 @@ export const editPost = createAsyncThunk(
   }
 );
 
-export const removePost = createAsyncThunk("post/remove", async (id) => {
-  try {
-    await postService.deletePost(id);
-    return id;
-  } catch (error) {
-    return rejectWithValue(
-      error.response?.data?.message || "Failed to add the post"
-    );
+export const removePost = createAsyncThunk(
+  "post/remove",
+  async (id, { rejectWithValue }) => {
+    try {
+      await postService.deletePost(id);
+      return id;
+    } catch (error) {
+      return rejectWithValue(
+        error.response?.data?.message || "Failed to delete the post"
+      );
+    }
   }
-});
+);
 
 export const postSlice = createSlice({
   name: "posts",
@@ -159,7 +162,7 @@ export const postSlice = createSlice({
         state.error = null;
       })
       .addCase(removePost.fulfilled, (state, action) => {
-        state.list.filter((post) => post._id !== action.payload);
+        state.list = state.list.filter((post) => post._id !== action.payload);
         state.loading = false;
         state.success = true;
 
