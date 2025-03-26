@@ -11,7 +11,6 @@ import VerifyEmail from "./pages/VerifyEmail";
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
 import Posts from "./pages/Posts";
-import PostDetail from "./features/post/PostDetail";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Dashboard from "./pages/Dashboard";
 import Profile from "./pages/Profile";
@@ -41,7 +40,6 @@ function App() {
         <Route path="/reset-password" element={<ResetPassword />}></Route>
 
         <Route path="/" element={<Posts />}></Route>
-        <Route path="/:id" element={<PostDetail />}></Route>
 
         <Route element={<ProtectedRoute />}>
         <Route path="/dashboard" element={<Dashboard />}></Route>

@@ -1,7 +1,14 @@
-import React from 'react'
+import PostForm from "../features/post/PostForm";
+
 
 export default function EditPost() {
-  return (
-    <div>EditPost</div>
-  )
+   return (
+     <div className="container py-5">
+       <div className="row justify-content-center">
+         <div className="col-lg-8">
+           <PostForm />
+         </div>
+       </div>
+     </div>
+   );
 }

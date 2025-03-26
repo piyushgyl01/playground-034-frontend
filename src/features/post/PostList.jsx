@@ -54,7 +54,7 @@ export default function PostList() {
       <div className="d-flex justify-content-between mb-4">
         <h2>All Posts</h2>
         {user && (
-          <Link to="/posts/create" className="btn btn-primary pt-2">
+          <Link to="/create" className="btn btn-primary pt-2">
             Create Post
           </Link>
         )}
@@ -90,7 +90,7 @@ export default function PostList() {
                     {user && post?.author?._id === user._id && (
                       <>
                         <Link
-                          to={`/posts/edit/${post._id}`}
+                          to={`/edit/${post._id}`}
                           className="btn btn-sm btn-outline-secondary me-2"
                         >
                           Edit
