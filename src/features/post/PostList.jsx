@@ -61,7 +61,7 @@ export default function PostList() {
       </div>
       {posts.length === 0 ? (
         <div className="alert alert-info">
-          No jobs found. Be the first to post a job!
+          No posts found. Be the first to post a job!
         </div>
       ) : (
         <div className="row row-cols-1 row-cols-md-2 g-4">

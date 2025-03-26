@@ -46,18 +46,21 @@ export default function PostForm() {
     if (isEditMode && currentPost) {
       // Ensure tags is always a properly formatted array
       let tagsArray = [];
-      
+
       if (currentPost.tags) {
         // Handle if tags is already an array
         if (Array.isArray(currentPost.tags)) {
-          tagsArray = currentPost.tags.filter(tag => tag !== "");
-        } 
+          tagsArray = currentPost.tags.filter((tag) => tag !== "");
+        }
         // Handle if tags is a string (could happen depending on API)
-        else if (typeof currentPost.tags === 'string') {
-          tagsArray = currentPost.tags.split(',').map(t => t.trim()).filter(t => t !== "");
+        else if (typeof currentPost.tags === "string") {
+          tagsArray = currentPost.tags
+            .split(",")
+            .map((t) => t.trim())
+            .filter((t) => t !== "");
         }
       }
-      
+
       setFormData({
         title: currentPost.title || "",
         content: currentPost.content || "",
@@ -67,11 +70,11 @@ export default function PostForm() {
           thumbnail: currentPost.featuredImage?.thumbnail || "",
         },
       });
-      
+
       // Set the tags input field
       if (Array.isArray(currentPost.tags)) {
         setTagsInput(currentPost.tags.join(", "));
-      } else if (typeof currentPost.tags === 'string') {
+      } else if (typeof currentPost.tags === "string") {
         setTagsInput(currentPost.tags);
       }
     }
@@ -105,7 +108,7 @@ export default function PostForm() {
       if (isEditMode) {
         await dispatch(editPost({ id, postData: formData })).unwrap();
       } else {
-        await dispatch(addPost(  formData )).unwrap();
+        await dispatch(addPost(formData)).unwrap();
       }
     } catch (error) {
       console.log("Error", error);
@@ -181,13 +184,13 @@ export default function PostForm() {
               onChange={(e) => {
                 // Just update the raw input string
                 setTagsInput(e.target.value);
-                
+
                 // Also process it into the formData.tags array
                 const newTags = e.target.value
                   .split(",")
                   .map((tag) => tag.trim())
                   .filter((tag) => tag !== "");
-                
+
                 setFormData({
                   ...formData,
                   tags: newTags,
@@ -249,7 +252,7 @@ export default function PostForm() {
               ) : isEditMode ? (
                 "Save Changes"
               ) : (
-                "Create Job"
+                "Create Post"
               )}
             </button>
           </div>
